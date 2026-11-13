@@ -13,14 +13,24 @@ def view_task():
     with open("tasks.json") as f:
         tasks = json.load(f)
     if not tasks:
-        print("No tasks found.")
+        print("No tasks found")
     else:
         print("Tasks:")
         for i in tasks:
             print(f"- {i}")
 
 def delete_task():
-    pass
+    with open("tasks.json") as f:
+        tasks = json.load(f)
+    if not tasks:
+        print("No tasks found")
+    else:
+        for i, x in enumerate(tasks, start=1):
+            print(f"{i}. {x}")
+        inp = int(input("Enter number of task to delete: "))
+        tasks.pop(inp-1)
+        with open("tasks.json", "w") as f:
+            json.dump(tasks, f, indent=2)
 
 def main():
     file = Path("tasks.json")
